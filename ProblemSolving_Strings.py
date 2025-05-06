@@ -158,6 +158,57 @@ test_case6 = 'hereiamstackerrank'
 expected_result6 = 'YES'
 assert(expected_result6 == hackerrankInString(test_case6))
 
+"""
+Q7. Caesar Cipher
+"""
+def caesarCipher(s, k):
+    # Write your code here
+    k = k % 26
+    result = []
+    
+    for char in s:
+        if char.isalpha():
+            base = 97 if char.islower() else 65
+            shifted = (ord(char) - base + k) % 26
+            result.append(chr(shifted + base))
+        else:
+            result.append(char)
+    return ''.join(result)  
+
+test_case7_s = 'abcdefghijklmnopqrstuvwxyz'
+test_case7_k = 3
+expected_result7 = 'defghijklmnopqrstuvwxyzabc'
+assert(expected_result7 == caesarCipher(test_case7_s, test_case7_k))
+    
+"""
+Q8. Weighted Uniform String
+"""
+def weightedUniformStrings(s, queries):
+    # Write your code here
+    weights = set()
+    current_char = s[0]
+    count = 1
+    char_weight = ord(current_char) - 96
+    weights.add(char_weight)
+    
+    for i in range(1, len(s)):
+        if s[i] == current_char:
+            count += 1
+        else:
+            current_char = s[i]
+            count = 1
+            char_weight = ord(current_char) - 96
+        
+        weights.add(char_weight * count)        
+    
+    # Process queries
+    result = []
+    for query in queries:
+        result.append("Yes" if query in weights else "No")
+    
+    return result
+
+    
 
             
     
